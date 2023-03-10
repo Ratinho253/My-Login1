@@ -38,7 +38,8 @@ fun LoginScreen() {
         modifier = Modifier.fillMaxSize(),
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             //Header
             Row(
@@ -59,7 +60,7 @@ fun LoginScreen() {
             //Form
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(17.dp)
             ) {
                 Text(
@@ -81,7 +82,7 @@ fun LoginScreen() {
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    label = { Text(text = "Email")},
+                    label = { Text(text = "Email") },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(
@@ -102,7 +103,7 @@ fun LoginScreen() {
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    label = { Text(text = "Password")},
+                    label = { Text(text = "Password") },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(
@@ -117,8 +118,7 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(31.dp))
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.End,
-
+                    horizontalAlignment = Alignment.End
                 ) {
                     Button(
                         onClick = { /*TODO*/ },
@@ -138,11 +138,34 @@ fun LoginScreen() {
                         )
                     }
                 }
-                Row() {
+                Spacer(modifier = Modifier.height(31.dp))
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
+                ) {
                     Row() {
-                        
+                        Text(text = "Don’t have an account?")
+                        Row() {
+                            Text(
+                                text = " Sign up",
+                                color = Color(207, 6, 240)
+                            )
+                        }
                     }
                 }
+
+                }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .width(140.dp)
+                        .height(50.dp),
+                    color = Color.Magenta,
+                    shape = RoundedCornerShape(0.dp, 15.dp, 0.dp, 0.dp)
+                ) {}
             }
 
         }
