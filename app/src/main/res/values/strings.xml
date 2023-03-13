@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">My Login</string>
+    <string name="title_login">Login</string>
+    <string name="subtitle_login">Please sign in to continue.</string>
+    <string name="email">email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="have_account">Don’t have an account?</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+
+
 </resources>
