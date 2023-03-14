@@ -48,8 +48,8 @@ fun LoginRegister() {
             ) {
                 Surface(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(50.dp),
+                        .width(120.dp)
+                        .height(40.dp),
                     color = colorResource(id = R.color.pink_login),
                     shape = RoundedCornerShape(0.dp, 0.dp, 0.dp, 15.dp)
                 ) {}
@@ -72,7 +72,7 @@ fun LoginRegister() {
                     fontWeight = FontWeight.W700
                 )
                 Text(
-                    text = "Create a new account",
+                    text = stringResource(id = R.string.create_new),
                     color = Color.Gray,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W400
@@ -87,13 +87,13 @@ fun LoginRegister() {
                     shape = RoundedCornerShape(16.dp),
                     label = {
                         Text(
-                            text = "username"
+                            text = stringResource(id = R.string.username)
                         )
                     },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(
-                                id = R.drawable.baseline_email_24
+                                id = R.drawable.baseline_person_24
                             ),
                             contentDescription = "",
                             tint = colorResource(id = R.color.pink_login)
@@ -110,13 +110,13 @@ fun LoginRegister() {
                     shape = RoundedCornerShape(16.dp),
                     label = {
                         Text(
-                            text = "phone"
+                            text = stringResource(id = R.string.phone)
                         )
                     },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(
-                                id = R.drawable.baseline_email_24
+                                id = R.drawable.baseline_phone_iphone_24
                             ),
                             contentDescription = "",
                             tint = colorResource(id = R.color.pink_login)
@@ -162,7 +162,7 @@ fun LoginRegister() {
                     leadingIcon = {
                         Icon(
                             painter = painterResource(
-                                id = R.drawable.baseline_email_24
+                                id = R.drawable.baseline_lock_24
                             ),
                             contentDescription = "",
                             tint = colorResource(id = R.color.pink_login)
@@ -182,7 +182,9 @@ fun LoginRegister() {
                            onCheckedChange = {}
                        )
                         Row(Modifier.padding(top = 14.dp)) {
-                            Text(text = "Over 18?")
+                            Text(
+                                text = stringResource(id = R.string.over_18)
+                            )
                         }
                     }
 
@@ -198,11 +200,13 @@ fun LoginRegister() {
                         onClick = { /*TODO*/ },
                         shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.buttonColors(colorResource(id = R.color.pink_login)),
-                        modifier = Modifier.fillMaxWidth().height(48.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp)
                     )
                     {
                         Text(
-                            text = "CREATE ACCOUNT",
+                            text = stringResource(id = R.string.create_account).uppercase(),
                             color = Color.White
                         )
                     }
@@ -216,13 +220,13 @@ fun LoginRegister() {
                 ) {
                     Row() {
                         Text(
-                            text = "Already have an account?"
+                            text = stringResource(id = R.string.already_have_account)
                         )
                         Row(
                             modifier = Modifier.padding(start = 3.dp)
                         ) {
                             Text(
-                                text = "Sign in",
+                                text = stringResource(id = R.string.sign_in),
                                 color = colorResource(id = R.color.pink_login)
                             )
                         }
@@ -236,8 +240,8 @@ fun LoginRegister() {
             ) {
                 Surface(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(50.dp),
+                        .width(120.dp)
+                        .height(40.dp),
                     color = colorResource(id = R.color.pink_login),
                     shape = RoundedCornerShape(0.dp, 15.dp, 0.dp, 0.dp)
                 ) {}

@@ -53,8 +53,8 @@ fun LoginScreen() {
             ) {
                 Surface(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(50.dp),
+                        .width(120.dp)
+                        .height(40.dp),
                     color = colorResource(id = R.color.pink_login),
                     shape = RoundedCornerShape(0.dp, 0.dp, 0.dp, 15.dp)
                 ) {}
@@ -144,7 +144,7 @@ fun LoginScreen() {
                         colors = ButtonDefaults.buttonColors(colorResource(id = R.color.pink_login))
                     ) {
                         Text(
-                            text = stringResource(id = R.string.sign_up).uppercase(Locale.getDefault()),
+                            text = stringResource(id = R.string.sign_up).uppercase(),
                             color = Color.White
                         )
                         Icon(
@@ -183,8 +183,8 @@ fun LoginScreen() {
             ) {
                 Surface(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(50.dp),
+                        .width(120.dp)
+                        .height(40.dp),
                     color = colorResource(id = R.color.pink_login),
                     shape = RoundedCornerShape(0.dp, 15.dp, 0.dp, 0.dp)
                 ) {}
