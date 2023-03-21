@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.mylogin
 
 import android.os.Bundle
+import android.security.AttestedKeyPair
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -76,7 +77,7 @@ fun Home() {
                                     RoundedCornerShape(280.dp)
                                 )
                                 .height(61.dp)
-                                    //verificar essa borda
+                                //verificar essa borda
                                 .border(BorderStroke(4.dp, Color.White))
                         )
                         Text(
@@ -154,7 +155,7 @@ fun Home() {
                     Row(modifier = Modifier
                         .width(109.dp)
                         .height(64.dp)
-                        .background(Color(234, 171,244))
+                        .background(Color(234, 171, 244))
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
@@ -176,7 +177,7 @@ fun Home() {
                     Row(modifier = Modifier
                         .width(109.dp)
                         .height(64.dp)
-                        .background(Color(234, 171,244))
+                        .background(Color(234, 171, 244))
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
@@ -199,39 +200,28 @@ fun Home() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(80.dp)
             ){
                 Row(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize(),
+                        .fillMaxSize().padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .height(48.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        label = {
-                            Text(
-                                text = "Search your destinity",
-                            )
-                        },
-                        leadingIcon = {
-                            Icon(
-                                painter = painterResource(
-                                    id = R.drawable.baseline_search_24
-                                ),
-                                contentDescription = "",
-                                tint = Color.Gray
-                            )
-                        }
-                    )
+                    OutlinedTextField(value = "", onValueChange = {},
+                    label = {
+                        Text(text = "Digite algo")
+                    })
                 }
             }
         }
     }
 }
+//@Preview(showBackground = true)
+//@Composable
+//fun Teste() {
+//
+//    Row() {
+//        OutlinedTextField(value = "", onValueChange = {}, label = { Text(text = "outro teste")})
+//    }
+//
+//}
 
