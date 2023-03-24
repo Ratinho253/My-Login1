@@ -9,6 +9,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -24,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.mylogin.dao.repository.ProductRepository
+import br.senai.sp.jandira.mylogin.model.Product
 import br.senai.sp.jandira.mylogin.ui.theme.MyLoginTheme
 
 class HomeActivity : ComponentActivity() {
@@ -31,15 +35,16 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyLoginTheme {
-                Home()
+                Home(ProductRepository.getProductList())
             }
         }
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+//@Preview(showSystemUi = true, showBackground = true)
+
 @Composable
-fun Home() {
+fun Home(products: List<Product>) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -119,109 +124,107 @@ fun Home() {
                 }
 
             }
-            Box(
+            Spacer(modifier = Modifier.height(5.dp))
+            Surface(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .padding(start = 19.dp)
+                    .fillMaxSize()
             ) {
-                //colocar uma column aqui para segurar a descrição (Categories)
-                Row(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(modifier = Modifier
-                        .width(109.dp)
-                        .height(64.dp)
-                        .background(colorResource(id = R.color.pink_login))
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_location_on_24),
-                                contentDescription = "",
-                                tint = Color.White
-                            )
-                            Text(
-                                text = "Montain",
-                                color = Color.White
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Row(modifier = Modifier
-                        .width(109.dp)
-                        .height(64.dp)
-                        .background(Color(234, 171, 244))
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_location_on_24),
-                                contentDescription = "",
-                                tint = Color.White
-                            )
-                            Text(
-                                text = "Snow",
-                                color = Color.White
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Row(modifier = Modifier
-                        .width(109.dp)
-                        .height(64.dp)
-                        .background(Color(234, 171, 244))
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_location_on_24),
-                                contentDescription = "",
-                                tint = Color.White
-                            )
-                            Text(
-                                text = "Beach",
-                                color = Color.White
-                            )
-                        }
-                    }
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ){
-                Row(
+                Column(
                     modifier = Modifier
-                        .fillMaxSize().padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    .fillMaxSize()
                 ) {
-                    OutlinedTextField(value = "", onValueChange = {},
-                    label = {
-                        Text(text = "Digite algo")
-                    })
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column() {
+                            Text(
+                                text = "Categories:",
+                                modifier = Modifier
+                                    .padding(start = 17.dp)
+                            )
+                            Spacer(modifier = Modifier.height(7.dp))
+                            LazyRow(
+                                modifier = Modifier
+                                    .padding(start = 19.dp)
+                            ) {
+                                items(products) { product ->
+                                    Card(
+                                        modifier = Modifier
+                                            .width(109.dp)
+                                            .height(64.dp),
+                                        backgroundColor = colorResource(id = R.color.pink_login)
+
+                                    ) {
+                                        Column(
+                                            modifier = Modifier.fillMaxSize(),
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Icon(
+                                                painter = product.image
+                                                    ?: painterResource(id = R.drawable.baseline_lock_24),
+                                                contentDescription = "",
+                                                tint = Color.White
+                                            )
+                                            Text(
+                                                text = product.name,
+                                                color = Color.White
+                                            )
+                                        }
+                                    }
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                }
+                            }
+
+                        }
+                    }
+                    //
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(80.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        OutlinedTextField(
+                            value = "",
+                            onValueChange = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 16.dp,
+                                    end = 17.dp
+                                ),
+                            shape = RoundedCornerShape(16.dp),
+                            label = {
+                                Text(text = "Search your destinity")
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(
+                                        id = R.drawable.baseline_search_24
+                                    ),
+                                    contentDescription = "",
+                                    tint = Color.Gray
+                                )
+                            }
+
+
+                        )
+                    }
                 }
             }
         }
     }
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun Teste() {
-//
-//    Row() {
-//        OutlinedTextField(value = "", onValueChange = {}, label = { Text(text = "outro teste")})
-//    }
-//
-//}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun DefaultPreview() {
+    MyLoginTheme {
+        Home(ProductRepository.getProductList())
+    }
+}
 
