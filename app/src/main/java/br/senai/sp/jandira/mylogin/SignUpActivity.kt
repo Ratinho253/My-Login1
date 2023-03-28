@@ -3,13 +3,22 @@ package br.senai.sp.jandira.mylogin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -17,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.mylogin.components.BottomShape
+import br.senai.sp.jandira.mylogin.components.TopShape
 import br.senai.sp.jandira.mylogin.ui.theme.MyLoginTheme
 import androidx.compose.material.CheckboxColors as CheckboxColors
 
@@ -46,13 +57,7 @@ fun LoginRegister() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                Surface(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(40.dp),
-                    color = colorResource(id = R.color.pink_login),
-                    shape = RoundedCornerShape(0.dp, 0.dp, 0.dp, 15.dp)
-                ) {}
+                TopShape()
             }
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -77,9 +82,67 @@ fun LoginRegister() {
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W400
                 )
+                //
 
-                Spacer(modifier = Modifier.height(45.dp))
-                
+                Box(
+                    modifier = Modifier.size(100.dp),
+                    contentAlignment = Alignment.BottomEnd
+                ){
+                    Card(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .align(Alignment.Center),
+                        shape = CircleShape,
+                        border = BorderStroke(
+                            width = 2.dp,
+                            Brush.horizontalGradient(
+                                listOf(
+                                    colorResource(id = R.color.pink_login),
+                                    Color.White
+                                )
+                            )
+                        )
+                    ) {
+                        Image(
+                            painter = painterResource(
+                                id = R.drawable.baseline_person_24
+                            ),
+                            contentDescription = "",
+                            colorFilter = ColorFilter.tint(colorResource(id = R.color.pink_login)),
+                            modifier = Modifier.size(64.dp)
+                        )
+                    }
+                    Image(
+                        painter = painterResource(
+                            id = R.drawable.camera
+                        ),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.BottomEnd)
+                            .offset(x = 5.dp, y = 5.dp)
+                            .size(28.dp),
+                    )
+//                    Card(
+//                        modifier = Modifier
+//                            .size(50.dp)
+//                            .align(alignment = Alignment.BottomEnd)
+//                            .offset(x = 15.dp),
+//                        shape = CircleShape,
+//                        backgroundColor = Color.Red
+//                    ) {
+//                        Icon(
+//                            //imageVector = Icons.Default.Call,
+//                            painter = painterResource(
+//                                id = R.drawable.baseline_photo_camera_24
+//                            ),
+//                            contentDescription = "",
+//                            modifier = Modifier.size(28.dp)
+//                        )
+//                    }
+
+                }
+                Spacer(modifier = Modifier.height(25.dp))
+
                 OutlinedTextField(
                     value = "Susanna Hoffs",
                     onValueChange = {},
@@ -238,13 +301,7 @@ fun LoginRegister() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
             ) {
-                Surface(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(40.dp),
-                    color = colorResource(id = R.color.pink_login),
-                    shape = RoundedCornerShape(0.dp, 15.dp, 0.dp, 0.dp)
-                ) {}
+                BottomShape()
             }
         }
 
