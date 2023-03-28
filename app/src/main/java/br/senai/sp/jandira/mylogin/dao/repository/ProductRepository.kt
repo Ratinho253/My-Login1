@@ -28,11 +28,11 @@ class ProductRepository {
                    name = "Beach",
                    image = painterResource(id = R.drawable.beach)
                ),
-               Product(
-                   id = 4,
-                   name = "Beach",
-                   image = painterResource(id = R.drawable.baseline_email_24)
-               )
+//               Product(
+//                   id = 4,
+//                   name = "Beach",
+//                   image = painterResource(id = R.drawable.baseline_email_24)
+//               )
            )
         }
     }

@@ -9,8 +9,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -19,14 +21,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.senai.sp.jandira.mylogin.dao.repository.LocationRepository
 import br.senai.sp.jandira.mylogin.dao.repository.ProductRepository
+import br.senai.sp.jandira.mylogin.model.Location
 import br.senai.sp.jandira.mylogin.model.Product
 import br.senai.sp.jandira.mylogin.ui.theme.MyLoginTheme
 
@@ -35,7 +41,10 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyLoginTheme {
-                Home(ProductRepository.getProductList())
+                Home(
+                    ProductRepository.getProductList(),
+                    LocationRepository.getLocationList()
+                )
             }
         }
     }
@@ -44,17 +53,19 @@ class HomeActivity : ComponentActivity() {
 //@Preview(showSystemUi = true, showBackground = true)
 
 @Composable
-fun Home(products: List<Product>) {
+fun Home(
+    products: List<Product>,
+    locations: List<Location>
+) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            Box(
+            Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
             ) {
                 Image(
                     painter = painterResource(
@@ -64,7 +75,7 @@ fun Home(products: List<Product>) {
                 )
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .height(220.dp)
                         .padding(15.dp),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -78,12 +89,15 @@ fun Home(products: List<Product>) {
                             ),
                             contentDescription = "",
                             modifier = Modifier
-                                .clip(
-                                    RoundedCornerShape(280.dp)
+                                .size(61.dp)
+                                .border(
+                                    BorderStroke(4.dp, Color.White),
+                                    CircleShape
                                 )
-                                .height(61.dp)
-                                //verificar essa borda
-                                .border(BorderStroke(4.dp, Color.White))
+                                .padding(4.dp)
+                                .clip(CircleShape),
+                            contentScale = ContentScale.Crop
+
                         )
                         Text(
                             text = "Susanna Hoffs",
@@ -124,19 +138,20 @@ fun Home(products: List<Product>) {
                 }
 
             }
-            Spacer(modifier = Modifier.height(5.dp))
+
+            Spacer(modifier = Modifier.height(13.dp))
+
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
                 Column(
                     modifier = Modifier
-                    .fillMaxSize()
+                        .fillMaxSize()
                 ) {
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column() {
@@ -153,25 +168,30 @@ fun Home(products: List<Product>) {
                                 items(products) { product ->
                                     Card(
                                         modifier = Modifier
-                                            .width(109.dp)
+                                            .width(109.dp) //width 125 e height 75 modificados para se adequar a tela(tamanho não está igual do figma)
                                             .height(64.dp),
                                         backgroundColor = colorResource(id = R.color.pink_login)
 
                                     ) {
                                         Column(
-                                            modifier = Modifier.fillMaxSize(),
+                                            modifier = Modifier.fillMaxSize().padding(8.dp),
                                             verticalArrangement = Arrangement.Center,
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
                                             Icon(
-                                                painter = product.image
-                                                    ?: painterResource(id = R.drawable.baseline_lock_24),
+                                                painter = product.image ?: painterResource(
+                                                    id = R.drawable.baseline_lock_24
+                                                ),
                                                 contentDescription = "",
+                                                modifier = Modifier
+                                                    .width(32.dp)
+                                                    .height(32.dp),
                                                 tint = Color.White
                                             )
                                             Text(
                                                 text = product.name,
-                                                color = Color.White
+                                                color = Color.White,
+                                                fontSize = 14.sp
                                             )
                                         }
                                     }
@@ -181,11 +201,10 @@ fun Home(products: List<Product>) {
 
                         }
                     }
-                    //
+                    Spacer(modifier = Modifier.height(20.dp))
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(80.dp),
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         OutlinedTextField(
@@ -214,7 +233,90 @@ fun Home(products: List<Product>) {
 
                         )
                     }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column() {
+                            Text(
+                                text = "Past Trips",
+                                modifier = Modifier
+                                    .padding(start = 17.dp)
+                            )
+                            Spacer(modifier = Modifier.height(9.dp))
+                            LazyColumn(
+                                modifier = Modifier
+                                    .padding(start = 17.dp, end = 18.dp)
+                            ) {
+                                items(locations) { locations ->
+                                    Card(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(208.dp),
+                                        elevation = 8.dp
+                                    ) {
+                                        Column(
+                                            modifier = Modifier
+                                                .padding(5.dp)
+                                                .fillMaxWidth(),
+                                            verticalArrangement = Arrangement.SpaceBetween
+                                        ) {
+                                            Image(
+                                                painter = locations.image ?:
+                                                painterResource(
+                                                    id = R.drawable.baseline_lock_24
+                                                ),
+                                                contentDescription = "",
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(106.dp)
+                                                    .clip(shape = RoundedCornerShape(10.dp)),
+                                                contentScale = ContentScale.Crop
+                                            )
+                                            Row() {
+                                                Text(
+                                                    text = locations.name,
+                                                    fontSize = 14.sp,
+                                                    color = colorResource(id = R.color.pink_login),
+                                                    fontWeight = FontWeight.W400,
+                                                    lineHeight = 15.sp
+                                                )
+                                                Spacer(modifier = Modifier.width(3.dp))
+                                                Text(
+                                                    text = locations.year,
+                                                    fontSize = 14.sp,
+                                                    color = colorResource(id = R.color.pink_login),
+                                                    fontWeight = FontWeight.W400,
+                                                    lineHeight = 15.sp
+                                                )
+                                            }
+                                            Spacer(modifier = Modifier.width(5.dp))
+                                            Text(
+                                                text = locations.description,
+                                                modifier = Modifier.fillMaxWidth(),
+                                                fontSize = 10.sp,
+                                                color = Color.Gray,
+                                                fontWeight = FontWeight.W400
+                                            )
+                                            Spacer(modifier = Modifier.width(13.dp))
+                                            Text(
+                                                text = locations.data_start_final,
+                                                modifier = Modifier.fillMaxWidth(),
+                                                textAlign = TextAlign.Right,
+                                                fontSize = 10.sp,
+                                                color = colorResource(id = R.color.pink_login)
+                                            )
+                                        }
+                                    }
+                                    Spacer(modifier = Modifier.height(11.dp))
+                                }
+                            }
+                        }
+                    }
                 }
+
             }
         }
     }
@@ -224,7 +326,10 @@ fun Home(products: List<Product>) {
 @Composable
 fun DefaultPreview() {
     MyLoginTheme {
-        Home(ProductRepository.getProductList())
+        Home(
+            ProductRepository.getProductList(),
+            LocationRepository.getLocationList()
+        )
     }
 }
 
