@@ -144,7 +144,7 @@ fun LoginRegister() {
                 Spacer(modifier = Modifier.height(25.dp))
 
                 OutlinedTextField(
-                    value = "Susanna Hoffs",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -167,7 +167,7 @@ fun LoginRegister() {
                 Spacer(modifier = Modifier.height(21.dp))
 
                 OutlinedTextField(
-                    value = "99999-0987",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -190,7 +190,7 @@ fun LoginRegister() {
                 Spacer(modifier = Modifier.height(21.dp))
 
                 OutlinedTextField(
-                    value = "susanna@email.com ",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -213,7 +213,7 @@ fun LoginRegister() {
                 Spacer(modifier = Modifier.height(21.dp))
 
                 OutlinedTextField(
-                    value = "************",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),

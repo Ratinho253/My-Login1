@@ -83,7 +83,7 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(87.dp))
 
                 OutlinedTextField(
-                    value = "teste@email.com",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -109,7 +109,7 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(31.dp))
 
                 OutlinedTextField(
-                    value = "**********",
+                    value = "",
                     onValueChange = {},
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
